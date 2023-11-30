@@ -1,0 +1,19 @@
+package com.siseth.adapter.feign.fedora.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+     public class FileWithPageResDTO {
+
+     private PaginationResDTO page;
+
+     private List<FileShortResDTO> files;
+}

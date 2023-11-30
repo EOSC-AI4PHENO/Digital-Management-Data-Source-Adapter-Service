@@ -1,0 +1,65 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.12'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.siseth'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2021.0.7")
+}
+
+dependencies {
+	implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.23.0'
+	implementation group: 'commons-io', name: 'commons-io', version: '2.13.0'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.1'
+	implementation group: 'org.apache.poi', name: 'poi', version: '5.2.3'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.3'
+	implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.27'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
+
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign'
+
+	implementation group: 'commons-net', name: 'commons-net', version: '3.8.0'
+// https://mvnrepository.com/artifact/com.jcraft/jsch
+	implementation group: 'com.jcraft', name: 'jsch', version: '0.1.55'
+
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.flywaydb:flyway-core'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.7.4'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

@@ -1,0 +1,23 @@
+CREATE SCHEMA IF NOT EXISTS "source";
+
+DROP TABLE IF EXISTS source."T_SOURCE_CONFIGURATION" CASCADE;
+
+CREATE TABLE source."T_SOURCE_CONFIGURATION"
+(
+	id bigserial NOT NULL,
+	"desc" varchar(500) NULL,
+	"ip" VARCHAR(255),
+	"port" INTEGER,
+	"user" VARCHAR(255),
+	"password" VARCHAR(255),
+	"type" VARCHAR(16), -- FTP,
+	"isActive" boolean NOT NULL DEFAULT TRUE,
+	"sourceId" BIGINT NOT NULL,
+	"createdAt" timestamp with time zone NOT NULL,
+	"modifiedAt" timestamp with time zone NOT NULL
+);
+
+ALTER TABLE source."T_SOURCE_CONFIGURATION" ADD CONSTRAINT "PK_T_SOURCE_CONFIGURATION"	PRIMARY KEY (id);
+
+ALTER TABLE "source"."T_SOURCE_CONFIGURATION" ADD CONSTRAINT "FK_T_SOURCE_CONFIGURATION_D_IMAGE_SOURCE"
+	FOREIGN KEY ("sourceId") REFERENCES "source"."D_IMAGE_SOURCE" (id) ON DELETE No Action ON UPDATE No Action;
